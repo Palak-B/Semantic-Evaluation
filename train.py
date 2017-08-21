@@ -2,7 +2,7 @@ import os
 import string
 from textblob import TextBlob
 
-dir = os.path.normpath('C:\\Users\\user\\Downloads\\SemEval2010_task8_all_data\\SemEval2010_task8_all_data\\SemEval2010_task8_training')
+dir = os.path.normpath('D:\\SemEval2010_task8_all_data\\SemEval2010_task8_training')
 f = open(os.path.join(dir,'TRAIN_FILE.TXT'))
 a = f.read()
 a=a.split('\n\n')
@@ -12,11 +12,14 @@ def extract(i):
     temp=temp[1:]
     temp = ' '.join(i for i in temp)
     sen = temp
+    e1=sen[sen.index('<e1>')+4:b[0].index('</e1>')-3]
+    e2=sen[sen.index('<e2>')+4:b[0].index('</e2>')-3]
     exclude = set(string.punctuation)
     sen = ''.join(ch for ch in sen if ch not in exclude)
     vec=[]
 
-    sen = sen.split()
+    '''
+    
     e1 = ''
     e2 = ''
     for i in sen:
@@ -24,7 +27,8 @@ def extract(i):
             e1=i[2:(len(i)-2)]
         if(i.startswith('e2')):
             e2=i[2:(len(i)-2)]
-
+    '''
+    
     if(b[2].startswith('Other')):
        vec.append(e1)
        vec.append(e2)
@@ -34,7 +38,9 @@ def extract(i):
     else:
        vec.append(e2)
        vec.append(e1)
+    
 
+    sen = sen.split()
     s =''
     for i in range(len(sen)):
         if(sen[i].startswith('e1') or sen[i].startswith('e2')):
@@ -99,7 +105,7 @@ for i in range(10):
                        if(c[k][1].startswith('V') or c[k][1].startswith('I')):
                            v.append(c[k][0])
                    train[i][j][2:]=v[:]
-dir= os.path.normpath('C:\\Users\\user\\Documents\\python\\philips')
+dir= os.path.normpath('D:\\Semantic-Evaluation-master')
 f = 'rel_'
 for i in range(10):
     fn = f + str(i) +'.txt'
