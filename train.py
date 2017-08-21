@@ -7,8 +7,8 @@ f = open(os.path.join(dir,'TRAIN_FILE.TXT'))
 a = f.read()
 a=a.split('\n\n')
 
-def extract(i):
-    temp=b[0].split()
+def extract(random):
+    temp=random.split()
     temp=temp[1:]
     temp = ' '.join(i for i in temp)
     sen = temp
